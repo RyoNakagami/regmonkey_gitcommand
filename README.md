@@ -3,7 +3,7 @@
 - This repository contains a collection of useful Git commands and scripts to help manage and automate your Git workflow.
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#ffa657;'>
-<strong style="color:#ffa657">Scope</strong> <br> 
+<strong style="color:#ffa657">Scope</strong> <br>
 
 - This repository is primarily intended for use on Linux or macOS systems.
 
@@ -14,7 +14,6 @@
 |command|Ubuntu|MacOS|
 |---|---|---|
 |`tree`|`apt install tree`|`brew install tree`|
-
 
 ## Install
 
@@ -59,7 +58,20 @@ rm -rf ~/.tool.d/regmonkey_gitcommand
 
 ## RECOMMENDATION: Update your a gitconfig
 
-stashasdsadssdsd
+To enhance your Git experience with some convenient aliases, please add the following lines to your `.gitconfig` file:
+
+```txt
+[alias]
+ # regmonkey_gitcommand
+ check-commitsize = "!git-check-commitsize"
+ tree = "!git-tree"
+ lastdiff = "!git-lastdiff"
+ tmp-checkout = "!git-tmp-checkout"
+ whoami = "!git-whoami"
+```
+
+These aliases provide shortcuts for common commands, making your workflow more efficient.
+For example, `git check-commitsize` will run the `git-check-commitsize` command, and git tree will run the gtree command.
 
 ## Contributing
 
