@@ -84,7 +84,7 @@ else {
 $threshold *= $scale_unit;
 
 # Print header
-print "commit-size commit-id file-number commit-date\n";
+printf "%-12s %-10s %-12s %-12s",  "commit-size", "commit-id", "file-number", "commit-date\n";
 
 # Process each commit
 foreach my $rev (`git rev-list --all --pretty=oneline --after $date`) {
@@ -97,6 +97,6 @@ foreach my $rev (`git rev-list --all --pretty=oneline --after $date`) {
         my $file_count = `git show --pretty="format:" --name-only $revn | wc -l`;
         my $commit_time = `git show $revn -s --format=%cd --date=short`;
         chomp($file_count, $commit_time);
-        print "${tot}${unit} ${revn} ${file_count} ${commit_time}\n";
+        printf "%-12s %-10s %-12s %-12s\n", "${tot}${unit}", $revn, $file_count, $commit_time;
     }
 }
