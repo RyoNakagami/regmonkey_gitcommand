@@ -6,6 +6,24 @@
 
 set -eu
 
+# Function to display usage information
+function usage {
+    cat <<EOM
+NAME
+    $(basename "$0")
+        This script uses git difftool to show the differences between the last commit and the 
+        current state of the specified file.
+
+Syntax
+    $(basename "$0") <folder path>
+
+EOM
+
+    exit 1
+}
+
+
+
 # Function to check if a file exists
 check_file_exists() {
   local file="$1"
@@ -28,8 +46,7 @@ fetch_commitid() {
 
 # arg check
 if [[ $# -eq 0 ]]; then
-  echo "Usage: $0 <file>"
-  exit 1
+  usage
 fi
 
 TARGET_FILE="$1"
