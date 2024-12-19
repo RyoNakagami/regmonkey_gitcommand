@@ -1,0 +1,38 @@
+# AUTHOR: RyoNak
+# UPDATE: 2024-12-19
+# ---------------------
+# General
+# ---------------------
+sandbox/
+tmp/
+
+# Sensitive
+*.gpg
+
+# Envrionments
+.env
+env/
+ENV/
+env.bak/
+
+# Ignore cache/temporary files
+.DS_Store
+*.bak
+*.swp
+*.tmp
+*.bak
+*.old
+
+# Ignore log files
+logs
+*.log
+
+# Ignore directories
+node_modules/
+vendor/
+dist/
+build/
+
+# Ignore bfg
+..bfg-report
+bfg_check_list/
