@@ -58,9 +58,12 @@ To enhance your Git experience with some convenient aliases, please add the foll
 ```txt
 [alias]
  # regmonkey_gitcommand
+ add-newline = "!git-add-newline"
+ add-patch = "!git-add-patch"
  check-commitsize = "!git-check-commitsize"
  lastdiff = "!git-lastdiff"
  newline-check = "!git-newline-check"
+ push-multiple-remotes = "!git-push-multiple-remotes"
  tree = "!gtree"
  tmp-checkout = "!git-tmp-checkout"
  whoami = "!git-whoami"
