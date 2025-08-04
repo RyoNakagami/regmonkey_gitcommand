@@ -1,5 +1,12 @@
 # regmonkey_gitcommand
 
+
+![Release](https://img.shields.io/github/release/ryonakagami/regmonkey_gitcommand.svg)
+![License](https://img.shields.io/github/license/ryonakagami/regmonkey_gitcommand.svg)
+![Issues](https://img.shields.io/github/issues/ryonakagami/regmonkey_gitcommand.svg)
+
+---
+
 - This repository contains a collection of useful Git commands and scripts to help manage and automate your Git workflow.
 - This repository is primarily intended for use on Linux or macOS systems.
 
@@ -64,6 +71,7 @@ To enhance your Git experience with some convenient aliases, please add the foll
  lastdiff = "!git-lastdiff"
  newline-check = "!git-newline-check"
  push-multiple-remotes = "!git-push-multiple-remotes"
+ sparse-checkout = "!git-sparse-checkout"
  tree = "!gtree"
  tmp-checkout = "!git-tmp-checkout"
  whoami = "!git-whoami"

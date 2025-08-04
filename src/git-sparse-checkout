@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+
+usage() {
+  echo "Usage: $0 -u <clone_url> -d <target_dir> -b <branch> -p <sparse_path>"
+  exit 1
+}
+
+while getopts "u:d:b:p:" opt; do
+  case $opt in
+    u) CLONE_URL=$OPTARG ;;
+    d) TARGET_DIR=$OPTARG ;;
+    b) BRANCH=$OPTARG ;;
+    p) SPARSE_PATH=$OPTARG ;;
+    *) usage ;;
+  esac
+done
+
+if [[ -z "$CLONE_URL" || -z "$TARGET_DIR" || -z "$BRANCH" || -z "$SPARSE_PATH" ]]; then
+  usage
+fi
+
+git clone --no-checkout "$CLONE_URL" "$TARGET_DIR"
+cd "$TARGET_DIR"
+
+git config core.sparseCheckout true
+echo "$SPARSE_PATH" > .git/info/sparse-checkout
+git checkout "$BRANCH"
