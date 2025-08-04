@@ -71,7 +71,6 @@ To enhance your Git experience with some convenient aliases, please add the foll
  lastdiff = "!git-lastdiff"
  newline-check = "!git-newline-check"
  push-multiple-remotes = "!git-push-multiple-remotes"
- sparse-checkout = "!git-sparse-checkout"
  tree = "!gtree"
  tmp-checkout = "!git-tmp-checkout"
  whoami = "!git-whoami"
