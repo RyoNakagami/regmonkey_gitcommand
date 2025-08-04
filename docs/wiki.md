@@ -7,6 +7,7 @@ A collection of git helper scripts to enhance your git workflow.
 - [git-check-commitsize](#git-check-commitsize) - Analyze commit sizes in repository
 - [git-lastdiff](#git-lastdiff) - Show diff between last commit and current state
 - [git-newline-check](#git-newline-check) - Check for missing trailing newlines
+- [git-sparse-checkout](#git-sparse-checkout) - Clone repository with sparse checkout for specific paths
 - [git-tmp-checkout](#git-tmp-checkout) - Create temporary branch with stashed changes
 - [git-tree](#git-tree) - Display git-tracked files in tree format
 - [git-whoami](#git-whoami) - Display git user identity
@@ -68,6 +69,52 @@ git-newline-check [options]
 - Skips binary files and SVG files automatically
 - Supports custom ignore patterns
 - Reports files missing trailing newlines
+
+## git-sparse-checkout
+
+Clones a Git repository with sparse checkout enabled, allowing you to work with only specific directories or files from a large repository.
+
+### Usage
+```bash
+git-sparse-checkout -u <clone_url> -d <target_dir> -b <branch> -p <sparse_path>
+```
+
+### Options
+- `-u <clone_url>` - URL of the Git repository to clone (required)
+- `-d <target_dir>` - Target directory where the repository will be cloned (required)
+- `-b <branch>` - Branch to checkout (required)
+- `-p <sparse_path>` - Path pattern for sparse checkout (required)
+
+### Example
+```bash
+# Clone only the 'docs' directory from a repository
+git-sparse-checkout -u https://github.com/user/repo.git -d ./my-repo -b main -p "docs/*"
+
+# Clone only specific files
+git-sparse-checkout -u https://github.com/user/repo.git -d ./project -b develop -p "src/main.py"
+
+# Clone multiple paths (use multiple patterns separated by newlines)
+git-sparse-checkout -u https://github.com/user/repo.git -d ./subset -b main -p "src/\ntest/"
+```
+
+### Features
+- Performs shallow clone with no initial checkout for efficiency
+- Automatically configures sparse checkout settings
+- Supports any valid Git URL (HTTPS, SSH, etc.)
+- Works with any branch name
+- Supports glob patterns for path matching
+
+### How It Works
+1. Clones the repository without checking out files (`--no-checkout`)
+2. Enables sparse checkout configuration (`core.sparseCheckout true`)
+3. Sets the sparse checkout path pattern in `.git/info/sparse-checkout`
+4. Checks out the specified branch with only the matching files
+
+### Use Cases
+- Working with large monorepos where you only need specific components
+- Reducing disk space usage by excluding unnecessary directories
+- Faster clone and checkout times for large repositories
+- Isolating specific project modules or documentation
 
 ## git-tmp-checkout
 
