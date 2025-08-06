@@ -10,7 +10,6 @@
 - This repository contains a collection of useful Git commands and scripts to help manage and automate your Git workflow.
 - This repository is primarily intended for use on Linux or macOS systems.
 
-
 ## Dependency
 
 |command|Ubuntu|MacOS|
@@ -67,6 +66,7 @@ To enhance your Git experience with some convenient aliases, please add the foll
  # regmonkey_gitcommand
  add-newline = "!git-add-newline"
  add-patch = "!git-add-patch"
+ browse = "!git-browse"
  check-commitsize = "!git-check-commitsize"
  lastdiff = "!git-lastdiff"
  newline-check = "!git-newline-check"
