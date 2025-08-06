@@ -1,7 +1,6 @@
 # regmonkey_gitcommand
 
-
-![Release](https://img.shields.io/github/release/ryonakagami/regmonkey_gitcommand.svg)
+![Release](https://img.shields.io/github/tag/ryonakagami/regmonkey_gitcommand.svg)
 ![License](https://img.shields.io/github/license/ryonakagami/regmonkey_gitcommand.svg)
 ![Issues](https://img.shields.io/github/issues/ryonakagami/regmonkey_gitcommand.svg)
 
