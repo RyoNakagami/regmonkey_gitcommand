@@ -2,23 +2,16 @@
 
 # git-sprint-commit - Create git commits with sprint week number
 #
-# This script creates a git commit with a message prefixed by the current sprint week
-# number in the format "sprint-YYYY-WWw: message"
-#
 # Usage:
-#   git sprint-commit [-m|--message] <commit message>
+#   git sprint-commit               Output current sprint week format
+#   git sprint-commit -m <message>  Create commit with sprint week prefix
 #
 # Options:
-#   -m, --message    Specify the commit message. Additional arguments will be
-#                    appended to the message
+#   -m, --message    Create a git commit with the given message
 #
 # Examples:
-#   git sprint-commit "Add new feature"
-#   git sprint-commit -m "Fix bug" in login system
-#   
-# Output format: sprint-YYYY-WWw: <message>
-#   YYYY: Current year
-#   WW: Current week number
+#   git sprint-commit          -> prints: sprint-2024-08w
+#   git sprint-commit -m "Fix" -> creates commit: sprint-2024-08w: Fix
 
 # Parse command line options
 TEMP=$(getopt -o m: --long message: -n 'git-sprint-commit' -- "$@")
@@ -49,6 +42,15 @@ while true; do
     esac
 done
 
+# Get sprint week format
+sprint_week="sprint-$(date +%Y-%Vw)"
+
+# If no message provided, just output the sprint week
+if [ -z "$message" ] && [ -z "$*" ]; then
+    echo "$sprint_week"
+    exit 0
+fi
+
 # Append any remaining arguments to message
 if [ -n "$*" ]; then
     if [ -n "$message" ]; then
@@ -58,13 +60,5 @@ if [ -n "$*" ]; then
     fi
 fi
 
-if [ -z "$message" ]; then
-    echo "Error: Commit message is required" >&2
-    exit 1
-fi
-
-# Create sprint commit message
-sprint_message="sprint-$(date +%Y-%Vw): $message"
-
-# Execute git commit
-git commit -m "$sprint_message"
+# Create sprint commit message and execute git commit
+git commit -m "$sprint_week: $message"
