@@ -3,56 +3,55 @@
 # git-sprint-commit - Create git commits with sprint week number
 #
 # Usage:
-#   git sprint-commit               Output current sprint week format
-#   git sprint-commit -m <message>  Create commit with sprint week prefix
+#   git sprint-commit               Create commit with sprint week format
+#   git sprint-commit -m <message>  Create commit with sprint week prefix and message
 #
 # Options:
-#   -m, --message    Create a git commit with the given message
+#   -m, --message <msg>   Commit message to append after sprint week prefix
+#   -h, --help            Show this help
 #
 # Examples:
-#   git sprint-commit          -> prints: sprint-2024-08w
+#   git sprint-commit          -> creates commit: sprint-2024-08w
 #   git sprint-commit -m "Fix" -> creates commit: sprint-2024-08w: Fix
 
-# Parse command line options
-TEMP=$(getopt -o m: --long message: -n 'git-sprint-commit' -- "$@")
+set -euo pipefail
 
-if [ $? -ne 0 ]; then
+print_help() {
+    grep '^#' "$0" | sed 's/^# \{0,1\}//'
+}
+
+# Parse command line options
+TEMP=$(getopt -o m:h --long message:,help -n 'git-sprint-commit' -- "$@") || {
     echo "Error: Invalid option" >&2
     exit 1
-fi
-
+}
 eval set -- "$TEMP"
 
 message=""
-
 while true; do
     case "$1" in
-        -m|--message)
-            message="$2"
-            shift 2
-            ;;
-        --)
-            shift
-            break
-            ;;
-        *)
-            echo "Internal error!" >&2
-            exit 1
-            ;;
+        -m|--message) message="$2"; shift 2 ;;
+        -h|--help)    print_help; exit 0 ;;
+        --) shift; break ;;
+        *) echo "Internal error!" >&2; exit 1 ;;
     esac
 done
 
-# Get sprint week format
+# Get sprint week format (ISO week number)
 sprint_week="sprint-$(date +%Y-%Vw)"
 
-# If no message provided, just output the sprint week
-if [ -z "$message" ] && [ -z "$*" ]; then
-    echo "$sprint_week"
+# If no message, commit only sprint week
+if [ -z "$message" ] && [ $# -eq 0 ]; then
+    if git diff --cached --quiet; then
+        echo "No staged changes to commit." >&2
+        exit 1
+    fi
+    git commit -m "$sprint_week"
     exit 0
 fi
 
-# Append any remaining arguments to message
-if [ -n "$*" ]; then
+# Append leftover args to message
+if [ $# -gt 0 ]; then
     if [ -n "$message" ]; then
         message="$message $*"
     else
@@ -60,5 +59,9 @@ if [ -n "$*" ]; then
     fi
 fi
 
-# Create sprint commit message and execute git commit
+# Commit with sprint prefix + message
+if git diff --cached --quiet; then
+    echo "No staged changes to commit." >&2
+    exit 1
+fi
 git commit -m "$sprint_week: $message"
