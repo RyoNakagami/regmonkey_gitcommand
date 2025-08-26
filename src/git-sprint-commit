@@ -17,10 +17,10 @@
 set -euo pipefail
 
 print_help() {
-    grep '^#' "$0" | sed 's/^# \{0,1\}//'
+    grep '^#\s' "$0" | sed 's/^# \{0,1\}//'
 }
 
-# Parse command line options
+## Parse command line options
 TEMP=$(getopt -o m:h --long message:,help -n 'git-sprint-commit' -- "$@") || {
     echo "Error: Invalid option" >&2
     exit 1
@@ -37,10 +37,10 @@ while true; do
     esac
 done
 
-# Get sprint week format (ISO week number)
+## Get sprint week format (ISO week number)
 sprint_week="sprint-$(date +%Y-%Vw)"
 
-# If no message, commit only sprint week
+## If no message, commit only sprint week
 if [ -z "$message" ] && [ $# -eq 0 ]; then
     if git diff --cached --quiet; then
         echo "No staged changes to commit." >&2
@@ -50,7 +50,7 @@ if [ -z "$message" ] && [ $# -eq 0 ]; then
     exit 0
 fi
 
-# Append leftover args to message
+## Append leftover args to message
 if [ $# -gt 0 ]; then
     if [ -n "$message" ]; then
         message="$message $*"
@@ -59,7 +59,7 @@ if [ $# -gt 0 ]; then
     fi
 fi
 
-# Commit with sprint prefix + message
+## Commit with sprint prefix + message
 if git diff --cached --quiet; then
     echo "No staged changes to commit." >&2
     exit 1
