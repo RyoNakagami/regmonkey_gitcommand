@@ -166,6 +166,7 @@ git-tree [folder_path]
 ### Requirements
 
 - `tree` command must be installed
+- [GitHub CLI (`gh`)](https://cli.github.com/)
 
 ### Features
 
