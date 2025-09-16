@@ -63,16 +63,16 @@ To enhance your Git experience with some convenient aliases, please add the foll
 ```txt
 [alias]
  # regmonkey_gitcommand
- add-newline = "!git-add-newline"
- add-patch = "!git-add-patch"
- browse = "!git-browse"
- check-commitsize = "!git-check-commitsize"
- lastdiff = "!git-lastdiff"
- newline-check = "!git-newline-check"
- push-multiple-remotes = "!git-push-multiple-remotes"
- tree = "!gtree"
- tmp-checkout = "!git-tmp-checkout"
- whoami = "!git-whoami"
+ add-newline = "!git-add-newline.sh"
+ add-patch = "!git-add-patch.sh"
+ browse = "!git-browse.sh"
+ check-commitsize = "!git-check-commitsize.sh"
+ lastdiff = "!git-lastdiff.sh"
+ newline-check = "!git-newline-check.sh"
+ push-multiple-remotes = "!git-push-multiple-remotes.sh"
+ tree = "!gtree.sh"
+ tmp-checkout = "!git-tmp-checkout.sh"
+ whoami = "!git-whoami.sh"
 ```
 
 These aliases provide shortcuts for common commands, making your workflow more efficient.
