@@ -17,4 +17,28 @@ check_tree_command() {
     fi
 }
 
+check_yamlcli_command() {
+    if command -v yamlcli &>/dev/null; then
+        echo "yamlcli is already installed."
+    else
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            uv tool install git+https://github.com/RyoNakagami/yamlcli.git
+              
+        elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            echo "Detected Linux. Installing yamlcli using npm..."
+            if command -v npm &>/dev/null; then
+                uv tool install git+https://github.com/RyoNakagami/yamlcli.git
+            else
+                echo "npm is not installed. Please install npm first."
+                return 1
+            fi
+        else
+            echo "Unsupported OS. Please install yamlcli manually."
+            return 1
+        fi
+    fi
+}
+
+# Run checks
 check_tree_command
+check_yamlcli_command

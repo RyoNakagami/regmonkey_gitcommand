@@ -14,6 +14,7 @@
 |command|Ubuntu|MacOS|
 |---|---|---|
 |`tree`|`apt install tree`|`brew install tree`|
+|`yamlcli`|`uv tool install git+https://github.com/RyoNakagami/yamlcli.git`|`uv tool install git+https://github.com/RyoNakagami/yamlcli.git`|
 
 ## Install
 

@@ -1,4 +1,18 @@
 #!/bin/bash
+# ------------------------------------------------
+# Author: Ryo Nakagami
+# Revised: 2025-10-21
+# Script: git-browse.sh
+# Description:
+#   Open the remote repository URL (branch, tag, or commit)
+#   in a web browser using the GitHub/GitLab/Bitbucket pattern.
+#
+# Usage:
+#   git browse [-b browser] [-r ref]
+#
+# Notes:
+#   - Requires: git, awk, sed, and a supported browser.
+# ------------------------------------------------
 set -euo pipefail
 
 BROWSER=""
@@ -78,6 +92,13 @@ if [ ${#remotes[@]} -gt 1 ]; then
     done
 else
     remote="${remotes[0]}"
+fi
+
+# Convert SSH to HTTPS if needed
+if [[ "$remote" =~ ^git@([^:]+):(.+)$ ]]; then
+    DOMAIN="${BASH_REMATCH[1]}"
+    REPO_PATH="${BASH_REMATCH[2]}"
+    remote="https://${DOMAIN}/${REPO_PATH}"
 fi
 
 # Modify URL if ref is specified
