@@ -66,15 +66,17 @@ To enhance your Git experience with some convenient aliases, please add the foll
   # regmonkey_gitcommand
   add-newline = "!git-add-newline.sh"
   add-patch = "!git-add-patch.sh"
-  issue2pr = "!git-issue2pr.sh"
   browse = "!git-browse.sh"
   check-commitsize = "!git-check-commitsize.sh"
+  delete-current-repo = "!git-delete-current-repo.sh"
+  delete-obsolete-branch = "!git-delete-obsolete-branch.sh"
+  issue2pr = "!git-issue2pr.sh"
   lastdiff = "!git-lastdiff.sh"
   newline-check = "!git-newline-check.sh"
-  tree = "!gtree.sh"
+  sprint-commit = "!git-sprint-commit.sh"
+  tree = "!git-tree.sh"
   tmp-checkout = "!git-tmp-checkout.sh"
   whoami = "!git-whoami.sh"
-  sprint-commit = "!git-sprint-commit.sh"
 ```
 
 These aliases provide shortcuts for common commands, making your workflow more efficient.

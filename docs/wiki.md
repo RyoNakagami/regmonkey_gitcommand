@@ -5,6 +5,7 @@ A collection of git helper scripts to enhance your git workflow.
 ## Table of Contents
 
 - [git-check-commitsize](#git-check-commitsize) - Analyze commit sizes in repository
+- [git-delete-obsolete-branch](#git-delete-obsolete-branch) - Delete local branches with no remote tracking
 - [git-lastdiff](#git-lastdiff) - Show diff between last commit and current state
 - [git-newline-check](#git-newline-check) - Check for missing trailing newlines
 - [git-sparse-checkout](#git-sparse-checkout) - Clone repository with sparse checkout for specific paths
@@ -39,8 +40,51 @@ git-check-commitsize -unit MB -lowersize 3 -days 10
 
 ### Output Format
 
-```ini
-commit-size  commit-id   file-number  commit-date
+```bash
+$git check-commitsize -unit KB -lowersize 3 -days 60
+commit-size  commit-id  file-number  commit-date
+14KB         096b7bfd   6            2025-10-23  
+10KB         cf906f92   3            2025-09-16  
+23KB         dbd7014a   14           2025-09-16  
+```
+
+## git-delete-obsolete-branch
+
+Manages deletion of local Git branches that no longer have corresponding remote tracking branches (gone branches).
+
+### Usage
+
+```bash
+git-delete-obsolete-branch [options]
+```
+
+### Options
+
+- `--dry` - Show branches that would be deleted without actually deleting them
+- `--yes` - Delete branches without confirmation
+- `-h` - Show help message
+
+### Features
+
+- Fetches and prunes remote branches automatically
+- Identifies branches with 'gone' remote tracking status
+- Provides three operation modes:
+  - Interactive (default): Asks for confirmation before deleting each branch
+  - Dry run: Shows which branches would be deleted
+  - Force delete: Deletes branches without asking
+- Safe deletion using `git branch -d`
+
+### Example
+
+```bash
+# Show branches that would be deleted
+git-delete-obsolete-branch --dry
+
+# Delete branches without confirmation
+git-delete-obsolete-branch --yes
+
+# Interactive mode (default)
+git-delete-obsolete-branch
 ```
 
 ## git-lastdiff
