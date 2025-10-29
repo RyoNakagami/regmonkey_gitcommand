@@ -1,7 +1,34 @@
 #!/bin/bash
-## Author: Ryo Nakagami
-## Revised: 2025-07-29
-## Description: Check for files missing a trailing newline in the git repository
+# ------------------------------------------------
+# Author: Ryo Nakagami
+# Revised: 2025-10-24
+# Script: git-add-newline.sh
+# Description:
+#   Automatically adds trailing newlines to files in a git repository
+#   that are missing them. This ensures proper file formatting and
+#   avoids "No newline at end of file" warnings.
+#
+#   Steps:
+#     1. Checks if we're in a git repository
+#     2. Gets list of all tracked files
+#     3. Filters files based on ignore patterns
+#     4. Skips binary and SVG files
+#     5. Adds newline if missing and reports changes
+#
+# Options:
+#    -h, --help     Show this help message
+#    -i PATTERN     Ignore files matching the given pattern (can be used multiple times)
+#
+# Usage:
+#   ./git-add-newline.sh                    # Process all tracked files
+#   ./git-add-newline.sh -i "*.md"          # Ignore markdown files
+#   ./git-add-newline.sh -i "*.jpg" -i "*.png"   # Ignore multiple patterns
+#
+# Notes:
+#   - Requires git to be installed and configured
+#   - Requires file command for MIME type detection
+#   - Must be run from within a git repository
+# ------------------------------------------------
 
 set -euo pipefail
 
